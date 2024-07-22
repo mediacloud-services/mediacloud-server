@@ -29,7 +29,6 @@ coverage/
 
 # Optional directories for test coverage reports
 .nyc_output/
-coverage/
 
 # Optional V8 coverage reports
 .v8/
