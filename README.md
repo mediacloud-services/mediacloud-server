@@ -64,23 +64,6 @@ A class that handles file uploads to the Media Cloud API, fetches uploaded media
 To run the tests for this package, make sure you have Jest installed:
 
 ```bash
-npm install --save-dev jest @types/jest ts-jest
-```
-
-Then, add the following to your `package.json`:
-
-```json
-"scripts": {
-  "test": "jest"
-},
-"jest": {
-  "preset": "ts-jest",
-  "testEnvironment": "node"
-}
-```
-Now you can run the tests with:
-
-```bash
 npm test
 ```
 
