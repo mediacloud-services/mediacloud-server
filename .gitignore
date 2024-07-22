@@ -51,7 +51,6 @@ coverage/
 .env.production
 
 # Lock files
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
