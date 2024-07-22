@@ -5,13 +5,13 @@ A TypeScript package for uploading files to the Media Cloud API, fetching upload
 ## Installation
 
 ```bash
-npm install media-cloud-uploader
+npm install mediacloud-server-client
 ```
 
 ## Usage
 
 ```typescript
-import { MediaCloudUploader } from 'media-cloud-uploader';
+import { MediaCloudUploader } from 'mediacloud-server-client';
 
 async function main() {
   const uploader = new MediaCloudUploader('your-api-key');
