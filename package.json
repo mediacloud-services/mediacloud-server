@@ -1,0 +1,26 @@
+{
+  "name": "mediacloud-server-client",
+  "version": "1.0.0",
+  "description": "A TypeScript package for uploading files to Media Cloud API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jerozeek/mediacloud-server-client.git"
+  },
+  "keywords": ["media", "upload", "mediacloud"],
+  "author": "Ezumah Jeremiah",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "form-data": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.3"
+  }
+}
