@@ -7,6 +7,11 @@ export interface UploadOptions {
     optimize?: boolean;
 }
 
+export interface MultipleUploadOptions {
+    filePaths: string[];
+    optimize?: boolean;
+}
+
 export type MediaItem = string;
 
 export interface PaginatedMediaResponse {
@@ -68,6 +73,29 @@ export class MediaCloudUploader {
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Upload failed');
+            }
+            throw error;
+        }
+    }
+
+    async uploadMultipleFiles({ filePaths, optimize = true }: MultipleUploadOptions): Promise<string[]> {
+        const form = new FormData();
+        filePaths.forEach((filePath) => {
+            const fileStream = fs.createReadStream(filePath);
+            form.append('media[]', fileStream);
+        });
+        form.append('optimize', optimize.toString());
+        try {
+            const response = await this.client.post('/media/upload', form, {
+                headers: {
+                    ...form.getHeaders()
+                },
+            });
+
+            return response.data?.mediaUrls || [];
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                throw new Error(error.response.data?.message || 'Multiple file upload failed');
             }
             throw error;
         }

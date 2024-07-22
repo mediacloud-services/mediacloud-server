@@ -1,6 +1,6 @@
 # Media Cloud Uploader
 
-A TypeScript package for uploading files to the Media Cloud API, fetching uploaded media, and deleting media.
+A TypeScript package for uploading single or multiple files to the Media Cloud API, fetching uploaded media, and deleting media.
 
 ## Installation
 
@@ -17,21 +17,34 @@ async function main() {
   const uploader = new MediaCloudUploader('your-api-key');
 
   try {
-    // Upload a file
+    // Upload a single file
     const imageUrl = await uploader.uploadFile({
-      filePath: '/path/to/your/file.jpg',
+      filePath: '/path/to/your/file1.jpg',
       optimize: true
     });
     console.log('Uploaded image URL:', imageUrl);
+
+    // Upload multiple files
+    const multipleImageUrls = await uploader.uploadMultipleFiles({
+      filePaths: ['/path/to/your/file1.jpg', '/path/to/your/file2.png', '/path/to/your/file3.gif'],
+      optimize: true
+    });
+    console.log('Uploaded image URLs:', multipleImageUrls);
 
     // Fetch uploaded media
     const uploadedMedia = await uploader.getUploadedMedia();
     console.log('Uploaded media:', uploadedMedia);
 
+    // Soft Delete a media item
+    const mediaId = 'bWVkaWEvaW1hZ2VzL29yaWdpbmFsL3JqMExYTUlPOUtLSDc2UXRwZkRIeEJ6NGwzN1VIb01aVWdUbnR0cVcucG5n';
+    await uploader.softDeleteMedia(mediaIdToDelete);
+    console.log('Media deleted successfully');
+
     // Delete a media item
     const mediaIdToDelete = 'bWVkaWEvaW1hZ2VzL29yaWdpbmFsL3JqMExYTUlPOUtLSDc2UXRwZkRIeEJ6NGwzN1VIb01aVWdUbnR0cVcucG5n';
     await uploader.deleteMedia(mediaIdToDelete);
     console.log('Media deleted successfully');
+    
   } catch (error) {
     console.error('Operation failed:', error);
   }
@@ -46,6 +59,31 @@ main();
 
 A class that handles file uploads to the Media Cloud API, fetches uploaded media, and deletes media.
 
+## Running Tests
+
+To run the tests for this package, make sure you have Jest installed:
+
+```bash
+npm install --save-dev jest @types/jest ts-jest
+```
+
+Then, add the following to your `package.json`:
+
+```json
+"scripts": {
+  "test": "jest"
+},
+"jest": {
+  "preset": "ts-jest",
+  "testEnvironment": "node"
+}
+```
+Now you can run the tests with:
+
+```bash
+npm test
+```
+
 #### Constructor
 
 ```typescript
@@ -58,7 +96,7 @@ new MediaCloudUploader(apiKey: string)
 
 ##### `uploadFile(options: UploadOptions): Promise<string>`
 
-Uploads a file to the Media Cloud API.
+Uploads a single file to the Media Cloud API.
 
 ###### Options
 
@@ -68,6 +106,19 @@ Uploads a file to the Media Cloud API.
 ###### Returns
 
 A promise that resolves to the URL of the uploaded media.
+
+##### `uploadMultipleFiles(options: MultipleUploadOptions): Promise<string[]>`
+
+Uploads multiple files to the Media Cloud API.
+
+###### Options
+
+- `filePaths` (string[]): An array of file paths to upload.
+- `optimize` (boolean, optional): Whether to optimize the uploaded media. Defaults to `true`.
+
+###### Returns
+
+A promise that resolves to an array of URLs of the uploaded media.
 
 ##### `getUploadedMedia(page?: number): Promise<PaginatedMediaResponse>`
 
@@ -106,4 +157,3 @@ An object containing the paginated list of media items and related pagination in
 ## License
 
 MIT
-# mediacloud-server-client
