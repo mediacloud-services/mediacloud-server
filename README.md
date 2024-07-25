@@ -51,7 +51,7 @@ async function main() {
     const uploadedMedia = await uploader.getMedias(page);
     console.log('Uploaded media:', uploadedMedia);
 
-    // Soft Delete a media item
+    // Move item to trash
     const mediaId = 'bWVkaWEvaW1hZ2VzL29yaWdpbmFsL3JqMExYTUlPOUtLSDc2UXRwZkRIeEJ6NGwzN1VIb01aVWdUbnR0cVcucG5n';
     await uploader.softDeleteMedia(mediaIdToDelete);
     console.log('Media deleted successfully');
