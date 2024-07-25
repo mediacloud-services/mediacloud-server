@@ -119,7 +119,7 @@ Uploads multiple files to the Media Cloud API.
 
 A promise that resolves to an array of URLs of the uploaded media.
 
-##### `getUploadedMedia(page?: number): Promise<PaginatedMediaResponse>`
+##### `getMedias(page?: number): Promise<PaginatedMediaResponse>`
 
 Fetches the list of uploaded media from the Media Cloud API.
 
