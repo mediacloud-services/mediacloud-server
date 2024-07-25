@@ -1,6 +1,21 @@
 # Media Cloud Uploader
 
-A TypeScript package for uploading single or multiple files to the Media Cloud API, fetching uploaded media, and deleting media.
+A TypeScript package for uploading single or multiple files to the Media Cloud API, fetching uploaded media, soft delete and permanent delete.
+
+## Supported Formats
+- jpeg
+- png
+- jpg
+- gif
+- svg
+- mp4
+- mp3
+- pdf
+- doc
+- docx
+- xls
+- xlsx
+- ppt
 
 ## Installation
 
@@ -20,19 +35,20 @@ async function main() {
     // Upload a single file
     const imageUrl = await uploader.uploadFile({
       filePath: '/path/to/your/file1.jpg',
-      optimize: true
+      optimize: true //optional and it only works for image files, other file type will not be optimized
     });
     console.log('Uploaded image URL:', imageUrl);
 
     // Upload multiple files
     const multipleImageUrls = await uploader.uploadMultipleFiles({
       filePaths: ['/path/to/your/file1.jpg', '/path/to/your/file2.png', '/path/to/your/file3.gif'],
-      optimize: true
+      optimize: true //optional and it will only optmized image files, other file type will not be optimized
     });
     console.log('Uploaded image URLs:', multipleImageUrls);
 
     // Fetch uploaded media
-    const uploadedMedia = await uploader.getUploadedMedia();
+    const page = 1
+    const uploadedMedia = await uploader.getMedias(page);
     console.log('Uploaded media:', uploadedMedia);
 
     // Soft Delete a media item
