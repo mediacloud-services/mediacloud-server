@@ -49,14 +49,14 @@ export class MediaCloudUploader {
         });
     }
 
-    formatMediaId(mediaId: string): string {
+    private formatMediaId(mediaId: string): string {
         if(mediaId.includes('.')){
             mediaId = mediaId.substring(0, mediaId.indexOf('.'));
         }
         return mediaId;
     }
 
-    async uploadFile({ filePath, optimize }: UploadOptions): Promise<string> {
+    public async uploadFile({ filePath, optimize }: UploadOptions): Promise<string> {
         const form = new FormData();
         const fileStream = fs.createReadStream(filePath);
         form.append('media[]', fileStream);
@@ -78,7 +78,7 @@ export class MediaCloudUploader {
         }
     }
 
-    async uploadMultipleFiles({ filePaths, optimize = true }: MultipleUploadOptions): Promise<string[]> {
+    public async uploadMultipleFiles({ filePaths, optimize = true }: MultipleUploadOptions): Promise<string[]> {
         const form = new FormData();
         filePaths.forEach((filePath) => {
             const fileStream = fs.createReadStream(filePath);
@@ -101,9 +101,9 @@ export class MediaCloudUploader {
         }
     }
 
-    async getMedias(): Promise<PaginatedMediaResponse> {
+    public async getMedias(page: number = 1): Promise<PaginatedMediaResponse> {
         try {
-            const response = await this.client.get('/media');
+            const response = await this.client.get(`/media?page=${page}`);
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
@@ -113,7 +113,7 @@ export class MediaCloudUploader {
         }
     }
 
-    async deleteMedia(mediaId: string): Promise<void> {
+    public async deleteMedia(mediaId: string): Promise<void> {
         try {
             //check if there is . in the mediaId
             //if there is remove it and all other characters after it
@@ -128,7 +128,7 @@ export class MediaCloudUploader {
         }
     }
 
-    async softDeleteMedia(mediaId: string): Promise<void> {
+    public async softDeleteMedia(mediaId: string): Promise<void> {
         try {
             //check if there is . in the mediaId
             //if there is remove it and all other characters after it

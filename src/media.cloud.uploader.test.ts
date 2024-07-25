@@ -9,7 +9,7 @@ jest.mock('fs');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 const mockedFs = fs as jest.Mocked<typeof fs>;
 
-describe('MediaCloudUploader', () => {
+describe('MediaCloudUploader Test Suite', () => {
     let uploader: MediaCloudUploader;
     let mockAxiosInstance: jest.Mocked<typeof axios>;
 
@@ -58,10 +58,11 @@ describe('MediaCloudUploader', () => {
             };
             mockAxiosInstance.get.mockResolvedValue(mockResponse);
 
-            const result = await uploader.getMedias();
+            const page = 1;
+            const result = await uploader.getMedias(page);
 
             expect(result).toEqual(mockResponse.data);
-            expect(mockAxiosInstance.get).toHaveBeenCalledWith('/media');
+            expect(mockAxiosInstance.get).toHaveBeenCalledWith('/media?page='+page);
         });
     });
 
