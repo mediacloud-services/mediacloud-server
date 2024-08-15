@@ -78,7 +78,7 @@ export class MediaCloudUploader {
         }
     }
 
-    public async uploadMultipleFiles({ filePaths, optimize = true }: MultipleUploadOptions): Promise<string[]> {
+    public async uploadMultipleFiles({ filePaths, optimize = false }: MultipleUploadOptions): Promise<string[]> {
         const form = new FormData();
         filePaths.forEach((filePath) => {
             const fileStream = fs.createReadStream(filePath);

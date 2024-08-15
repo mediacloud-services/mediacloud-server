@@ -41,7 +41,7 @@ describe('MediaCloudUploader Test Suite', () => {
             mockAxiosInstance.post.mockResolvedValue(mockResponse);
             mockedFs.createReadStream.mockReturnValue('mock-file-stream' as any);
 
-            const result = await uploader.uploadMultipleFiles({ filePaths: ['/path/to/file1.jpg', '/path/to/file2.jpg'] });
+            const result = await uploader.uploadMultipleFiles({ filePaths: ['/path/to/file1.jpg', '/path/to/file2.jpg'], optimize: true });
 
             expect(result).toEqual(['https://example.com/media/image1.jpg', 'https://example.com/media/image2.jpg']);
         });
