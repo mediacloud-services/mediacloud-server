@@ -1,6 +1,6 @@
 {
   "name": "mediacloud-server-client",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A TypeScript package for uploading files to Media Cloud API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "contributors": [
-    "Ezumah Jeremiah Kalu <jerozeek2@gmail.com> (https://mediacloud.ng)"
+    "Ezumah Jeremiah Kalu <jerozeek2@gmail.com> (https://mediacloud.me)"
   ],
   "repository": {
     "type": "git",

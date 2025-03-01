@@ -42,7 +42,7 @@ export class MediaCloudUploader {
     constructor(apiKey: string) {
         this.apiKey = apiKey;
         this.client = axios.create({
-            baseURL: 'https://mediacloud.ng/api',
+            baseURL: 'https://mediacloud.me/api',
             headers: {
                 'Authorization': `Bearer ${this.apiKey}`
             }
@@ -70,7 +70,7 @@ export class MediaCloudUploader {
                 },
             });
             return response.data?.mediaUrls[0];
-        } catch (error) {
+        } catch (error:any) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Upload failed');
             }
@@ -93,7 +93,7 @@ export class MediaCloudUploader {
             });
 
             return response.data?.mediaUrls || [];
-        } catch (error) {
+        } catch (error:any) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Multiple file upload failed');
             }
@@ -105,7 +105,7 @@ export class MediaCloudUploader {
         try {
             const response = await this.client.get(`/media?page=${page}`);
             return response.data;
-        } catch (error) {
+        } catch (error:any) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Failed to fetch uploaded media');
             }
@@ -120,7 +120,7 @@ export class MediaCloudUploader {
             mediaId = this.formatMediaId(mediaId);
             const response = await this.client.delete(`/media/${mediaId}`);
             return response.data;
-        } catch (error) {
+        } catch (error:any) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Failed to delete media');
             }
@@ -135,7 +135,7 @@ export class MediaCloudUploader {
             mediaId = this.formatMediaId(mediaId);
             const response = await this.client.delete(`/media/trash/${mediaId}`);
             return response.data;
-        } catch (error) {
+        } catch (error:any) {
             if (axios.isAxiosError(error) && error.response) {
                 throw new Error(error.response.data?.message || 'Failed to soft delete media');
             }
